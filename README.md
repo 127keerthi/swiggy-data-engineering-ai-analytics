@@ -1,62 +1,40 @@
-\# 🍔 Swiggy Food Delivery Data Engineering \& AI Analytics Platform
+\# Swiggy Food Delivery Data Engineering and AI Analytics Platform
 
 
 
-An end-to-end food delivery data engineering and AI analytics platform built using \*\*Snowflake, dbt, Apache Airflow, Python, NLP, RAG, Text-to-SQL and Streamlit\*\*.
+This project is an end-to-end food delivery data engineering and analytics platform built around a Swiggy dataset. The project covers the complete workflow from raw data ingestion and data warehouse modeling to transformation, orchestration, analytics and AI-based review analysis.
 
 
 
-The project demonstrates how raw food-delivery data can be transformed into a modern analytical platform with automated data pipelines, dimensional data modeling, data quality testing, sentiment intelligence, RAG-based review search, controlled Text-to-SQL and interactive business dashboards.
+The main technologies used in the project are Python, SQL, Snowflake, dbt, Apache Airflow and Streamlit. I also implemented a local sentiment analysis pipeline, a review retrieval system using TF-IDF and cosine similarity, and a controlled Text-to-SQL interface for querying the analytical data.
 
 
 
-\---
+\## Project Overview
 
 
 
-\## 🚀 Project Overview
+The objective of this project was to build a complete data engineering workflow rather than only creating a dashboard.
 
 
 
-This project implements a complete data engineering and analytics workflow:
+Raw food delivery data is first organized through a local data lake and loaded into Snowflake. dbt is then used to clean and transform the data into staging and analytical models. Apache Airflow manages the execution of the pipeline and the associated data quality checks.
 
 
 
-\*\*Raw Data → Local Data Lake → Snowflake → dbt → Airflow → AI/NLP → Analytics → Streamlit\*\*
+The processed data is used by the Streamlit application for business analysis, operational reporting and customer review intelligence.
 
 
 
-The platform processes food-delivery data and creates analytical models for:
+The overall flow is:
 
 
 
-\- Customer analytics
-
-\- Restaurant performance
-
-\- Food and menu analytics
-
-\- Order analytics
-
-\- Revenue analysis
-
-\- Review analysis
-
-\- Sentiment intelligence
-
-\- Operational analytics
-
-\- AI-powered review search
-
-\- Natural-language SQL analytics
+\*\*Local Data Lake → Snowflake → dbt → Airflow → AI/NLP Processing → Streamlit Analytics\*\*
 
 
 
-\---
-
-
-
-\## 🏗️ Architecture
+\## Architecture
 
 
 
@@ -64,69 +42,161 @@ The platform processes food-delivery data and creates analytical models for:
 
 
 
-\### Pipeline Flow
+The warehouse follows a layered structure consisting of RAW, STAGING, MARTS and AI schemas.
+
+
+
+The RAW layer contains the source data. The STAGING layer contains cleaned and standardized models, while the MARTS layer contains the business-ready fact and dimension tables. The AI layer contains the processed review sentiment data.
+
+
+
+\## Data Warehouse
+
+
+
+The Snowflake warehouse contains the following main analytical tables:
+
+
+
+\- DIM\_USERS
+
+\- DIM\_RESTAURANTS
+
+\- DIM\_FOOD
+
+\- DIM\_MENU
+
+\- FCT\_ORDERS
+
+\- FCT\_ORDER\_ITEMS
+
+\- FCT\_REVIEWS
+
+\- REVIEW\_SENTIMENT
+
+
+
+The dataset used in the project contains approximately:
+
+
+
+| Dataset | Records |
+
+| --- | ---: |
+
+| Users | 100,000 |
+
+| Restaurants | 148,541 |
+
+| Food | 371,560 |
+
+| Menu | 1,178,743 |
+
+| Orders | 1,641,321 |
+
+| Order Items | 3,774,958 |
+
+| Reviews | 300,000 |
+
+
+
+\## Data Engineering Pipeline
+
+
+
+\### Data Ingestion
+
+
+
+The project uses a local filesystem as the initial data lake. This was chosen so that the complete pipeline could be developed and tested locally without depending on cloud object storage.
+
+
+
+The raw data is loaded into the Snowflake RAW layer before transformation.
+
+
+
+\### dbt Transformation
+
+
+
+dbt is used to transform the raw Snowflake tables into staging and mart models.
+
+
+
+The staging layer contains models for users, restaurants, food, menu, orders, order items and reviews.
+
+
+
+The mart layer contains the dimensional and fact models used by the analytics application.
+
+
+
+The project also includes dbt tests for the analytical models. During testing, all 20 mart-level tests passed successfully.
+
+
+
+\### Apache Airflow
+
+
+
+Apache Airflow is used to orchestrate the pipeline.
+
+
+
+The main workflow is:
 
 
 
 ```text
 
-Food Delivery Dataset
+check\_environment
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ▼
+&#x20;       v
 
-Local Data Lake
+dbt\_debug
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ▼
+&#x20;       v
 
-Snowflake RAW Layer
+dbt\_run\_staging
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ▼
+&#x20;       v
 
-dbt Staging Layer
+dbt\_test\_staging
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ▼
+&#x20;       v
 
-dbt Mart Layer
+dbt\_run\_marts
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ▼
+&#x20;       v
 
-Apache Airflow
+dbt\_test\_marts
 
-&#x20;       │
+&#x20;       |
 
-&#x20;       ├── Data Quality Tests
+&#x20;       v
 
-&#x20;       ├── Sentiment Analysis
+review\_sentiment
 
-&#x20;       └── Pipeline Validation
+&#x20;       |
 
-&#x20;       │
+&#x20;       v
 
-&#x20;       ▼
+validate\_sentiment
 
-Snowflake AI Layer
+&#x20;       |
 
-&#x20;       │
+&#x20;       v
 
-&#x20;       ├── Sentiment Intelligence
-
-&#x20;       ├── RAG Search
-
-&#x20;       └── Text-to-SQL
-
-&#x20;       │
-
-&#x20;       ▼
-
-Streamlit Analytics Platform
+pipeline\_complete
 
