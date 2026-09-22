@@ -1,0 +1,9 @@
+services:
+
+  airflow-scheduler:
+    volumes:
+      - ../ai:/opt/airflow/ai
+
+  airflow-dag-processor:
+    volumes:
+      - ../ai:/opt/airflow/ai

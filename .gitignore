@@ -1,0 +1,53 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+profiles.yml
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# dbt generated files
+swiggy_dbt/target/
+swiggy_dbt/logs/
+swiggy_dbt/dbt_packages/
+
+# Airflow generated files
+airflow/logs/
+airflow/logs/*
+logs/
+
+# Local datasets
+data/raw/
+data/processed/
+
+# Large/local data files
+*.parquet
+*.pkl
+*.pickle
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+airflow/config/*.yml
+airflow/config/*.cfg
+ai/streamlit/ai/

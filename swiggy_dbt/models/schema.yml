@@ -1,0 +1,177 @@
+version: 2
+
+models:
+
+  # =========================
+  # STAGING MODELS
+  # =========================
+
+  - name: stg_users
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_restaurants
+    columns:
+      - name: restaurant_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_food
+    columns:
+      - name: food_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_menu
+    columns:
+      - name: menu_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+      - name: food_id
+        tests:
+          - not_null
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+      - name: food_id
+        tests:
+          - not_null
+
+  - name: stg_reviews
+    columns:
+      - name: review_id
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+
+  # =========================
+  # MARTS - DIMENSIONS
+  # =========================
+
+  - name: dim_users
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_restaurants
+    columns:
+      - name: restaurant_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_food
+    columns:
+      - name: food_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_menu
+    columns:
+      - name: menu_id
+        tests:
+          - not_null
+
+
+  # =========================
+  # MARTS - FACTS
+  # =========================
+
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+  - name: fct_order_items
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null
+
+      - name: food_id
+        tests:
+          - not_null
+
+  - name: fct_reviews
+    columns:
+      - name: review_id
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: restaurant_id
+        tests:
+          - not_null

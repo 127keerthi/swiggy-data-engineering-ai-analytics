@@ -1,0 +1,9 @@
+streamlit
+pandas
+plotly
+snowflake-connector-python
+python-dotenv
+pyyaml
+scikit-learn
+textblob
+textblob==0.20.1

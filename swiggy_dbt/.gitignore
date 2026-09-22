@@ -1,0 +1,97 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Credentials / Secrets
+# =========================
+credentials.json
+service-account.json
+secrets.json
+*.pem
+*.key
+
+# Snowflake credentials
+profiles.yml
+
+# =========================
+# dbt
+# =========================
+target/
+dbt_packages/
+logs/
+
+# =========================
+# Airflow
+# =========================
+airflow/logs/
+airflow/logs/*
+*.log
+
+# =========================
+# Streamlit
+# =========================
+.streamlit/secrets.toml
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+
+# =========================
+# Local databases
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Large datasets
+# =========================
+data/raw/
+data/processed/
+
+# =========================
+# Generated dbt documentation
+# =========================
+dbt/target/
+dbt/logs/

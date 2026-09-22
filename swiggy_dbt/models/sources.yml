@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: swiggy_raw
+    database: SWIGGY
+    schema: RAW
+
+    tables:
+      - name: users
+      - name: restaurants
+      - name: food
+      - name: menu
+      - name: orders
+      - name: order_items
+      - name: reviews
